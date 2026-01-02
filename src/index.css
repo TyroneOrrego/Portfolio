@@ -1,0 +1,594 @@
+@import '../app/globals.css';
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 100px;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+    font-synthesis: none;
+  }
+
+  /* Enhanced focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-black dark:outline-white;
+    outline-style: solid;
+  }
+
+  /* Improved button and interactive element focus */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-2 outline-offset-2 outline-black dark:outline-white;
+    outline-style: solid;
+  }
+
+  /* Enhanced selection styles */
+  ::selection {
+    @apply bg-black/10 text-black dark:bg-white/10 dark:text-white;
+  }
+
+  /* Improved typography scale */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl;
+  }
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl xl:text-6xl;
+  }
+  h3 {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+  }
+  h4 {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+  h5 {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+  h6 {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+
+  /* Enhanced paragraph spacing */
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-wrap: pretty;
+  }
+
+  /* Improved link styles */
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply opacity-60;
+  }
+
+  /* Better list styling */
+  ul,
+  ol {
+    @apply space-y-2;
+  }
+
+  li {
+    line-height: 1.6;
+  }
+
+  /* Enhanced image handling */
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* Better form elements */
+  input,
+  textarea,
+  select {
+    @apply transition-all duration-200;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply ring-1 ring-black/20 dark:ring-white/20 ring-offset-0;
+  }
+}
+
+/* Enhanced utility classes */
+@layer utilities {
+  /* Improved mobile menu handling */
+  .mobile-menu-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    touch-action: none;
+  }
+
+  /* Enhanced transitions with hardware acceleration */
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* Optimized stacking contexts */
+  .z-nav {
+    z-index: 100;
+  }
+  .z-menu {
+    z-index: 95;
+  }
+  .z-overlay {
+    z-index: 90;
+  }
+  .z-modal {
+    z-index: 85;
+  }
+  .z-tooltip {
+    z-index: 80;
+  }
+
+  /* Performance optimizations */
+  .transform-gpu {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
+
+  /* Enhanced animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 3s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  /* Improved text rendering */
+  .text-crisp {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Enhanced spacing system */
+  .space-y-section > * + * {
+    margin-top: 6rem;
+  }
+
+  .space-y-component > * + * {
+    margin-top: 3rem;
+  }
+
+  /* Better container queries */
+  .container-xs {
+    max-width: 475px;
+  }
+  .container-sm {
+    max-width: 640px;
+  }
+  .container-md {
+    max-width: 768px;
+  }
+  .container-lg {
+    max-width: 1024px;
+  }
+  .container-xl {
+    max-width: 1280px;
+  }
+  .container-2xl {
+    max-width: 1536px;
+  }
+
+  /* Removed unused gradient utilities */
+
+  /* Line clamping utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Removed unused glass morphism utilities */
+}
+
+/* Removed unused Radix Select styles */
+
+/* Enhanced keyframes */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Enhanced form styles */
+input:invalid:not(:placeholder-shown) {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+}
+
+input:valid:not(:placeholder-shown) {
+  @apply border-emerald-500 focus:border-emerald-500 focus:ring-emerald-500;
+}
+
+/* Better scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-500;
+}
+
+/* Enhanced print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: black !important;
+    background: white !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    color: black !important;
+  }
+
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+}
+
+/* Enhanced reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-gradient-x {
+    animation: none !important;
+  }
+}
+
+/* Enhanced high contrast support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 20%;
+    --ring: 0 0% 30%;
+  }
+
+  .dark {
+    --border: 0 0% 80%;
+    --ring: 0 0% 70%;
+  }
+
+  button,
+  a {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  /* Removed unused orange color overrides */
+}
+
+/* Enhanced color scheme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+
+  .hover\:shadow-xl:hover {
+    box-shadow: none;
+  }
+}
+
+/* Enhanced focus management */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap::before,
+.focus-trap::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Better loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Enhanced skeleton loading */
+.skeleton {
+  @apply animate-pulse bg-slate-200 dark:bg-slate-700 rounded;
+}
+
+.skeleton-text {
+  @apply h-4 bg-slate-200 dark:bg-slate-700 rounded;
+}
+
+.skeleton-avatar {
+  @apply w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full;
+}
+
+/* Better button states */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Better text truncation */
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Enhanced backdrop blur */
+.backdrop-blur-strong {
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Better spacing for touch devices */
+@media (max-width: 768px) {
+  .touch-spacing {
+    padding: 1rem;
+  }
+
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
