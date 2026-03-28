@@ -9,7 +9,7 @@ export default function About() {
 
         <div className="max-w-3xl space-y-8">
           <p className="text-base md:text-lg text-black/60 dark:text-white/60 leading-relaxed">
-            With over 3 years of experience in technical writing, I specialize in creating documentation that not only
+            With over 4 years of experience in technical writing, I specialize in creating documentation that not only
             informs but empowers users to achieve their goals efficiently. My approach combines deep technical
             understanding with user-centered design principles.
           </p>

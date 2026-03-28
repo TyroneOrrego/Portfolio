@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Menu, X } from "lucide-react"
 import useMediaQuery from "@/hooks/useMediaQuery"
 import { useUI } from "@/contexts/ui-context"
+import { NAV_PAGES, PAGE_TO_SECTION_ID } from "@/lib/config"
+import { scrollToSection } from "@/lib/utils"
 
 interface NavLinkProps {
   page: string
@@ -11,37 +13,19 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ page, selectedPage, setSelectedPage, onClick }: NavLinkProps) => {
-  // Map page names to section IDs
-  const pageToSectionId: Record<string, string> = {
-    home: "hero",
-    about: "about",
-    services: "skills", // Map services to skills for now
-    skills: "skills",
-    projects: "projects",
-    contact: "contact",
-  }
-
   const lowerCasePage = page.toLowerCase()
-  const sectionId = pageToSectionId[lowerCasePage] || lowerCasePage
+  const sectionId = PAGE_TO_SECTION_ID[lowerCasePage] || lowerCasePage
 
   return (
-    <button
+    <a
+      href={`#${sectionId}`}
       className={`${
         selectedPage === sectionId ? "text-black dark:text-white font-normal" : "text-black/60 dark:text-white/60"
-      } hover:text-black dark:hover:text-white transition-all duration-300 text-sm tracking-wide relative group`}
+      } hover:text-black dark:hover:text-white transition-all duration-300 text-sm tracking-wide relative group block`}
       onClick={(e) => {
         e.preventDefault()
         setSelectedPage(sectionId)
-
-        const element = document.getElementById(sectionId)
-        if (element) {
-          const offsetTop = element.getBoundingClientRect().top + window.pageYOffset
-          window.scrollTo({
-            top: offsetTop - 80,
-            behavior: "smooth",
-          })
-        }
-
+        scrollToSection(sectionId, 80)
         onClick?.()
       }}
     >
@@ -51,7 +35,7 @@ const NavLink = ({ page, selectedPage, setSelectedPage, onClick }: NavLinkProps)
           selectedPage === sectionId ? "w-full" : "w-0 group-hover:w-full"
         }`}
       />
-    </button>
+    </a>
   )
 }
 
@@ -59,27 +43,52 @@ export default function Navbar() {
   const { activeSection: selectedPage, setActiveSection: setSelectedPage, isTopOfPage } = useUI()
   const [isMenuToggled, setIsMenuToggled] = useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const navbarClasses = isTopOfPage
     ? "bg-white/80 dark:bg-black/80 backdrop-blur-sm"
     : "bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-black/10 dark:border-white/10"
 
-  const navPages = ["Home", "About", "Skills", "Projects", "Contact"]
-
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isMenuToggled) {
         setIsMenuToggled(false)
       }
+
+      // Very simple focus trapping logic
+      if (e.key === "Tab" && isMenuToggled && menuRef.current) {
+        const focusableElements = menuRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select'
+        )
+        const firstElement = focusableElements[0] as HTMLElement
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus()
+            e.preventDefault()
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus()
+            e.preventDefault()
+          }
+        }
+      }
     }
 
-    document.addEventListener("keydown", handleEscape)
-    return () => document.removeEventListener("keydown", handleEscape)
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
   }, [isMenuToggled])
 
   useEffect(() => {
     if (isMenuToggled && !isDesktop) {
       document.body.style.overflow = "hidden"
+      // Wait for render then focus the menu
+      setTimeout(() => {
+        const firstFocusable = menuRef.current?.querySelector('button')
+        firstFocusable?.focus()
+      }, 50)
     } else {
       document.body.style.overflow = ""
     }
@@ -102,28 +111,11 @@ export default function Navbar() {
   }
 
   const handleMobileNavClick = (page: string) => {
-    const pageToSectionId: Record<string, string> = {
-      home: "hero",
-      about: "about",
-      services: "skills",
-      skills: "skills",
-      projects: "projects",
-      contact: "contact",
-    }
-
     const lowerCasePage = page.toLowerCase()
-    const sectionId = pageToSectionId[lowerCasePage] || lowerCasePage
+    const sectionId = PAGE_TO_SECTION_ID[lowerCasePage] || lowerCasePage
     setSelectedPage(sectionId)
     setIsMenuToggled(false)
-
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset
-      window.scrollTo({
-        top: offsetTop - 80,
-        behavior: "smooth",
-      })
-    }
+    scrollToSection(sectionId, 80)
   }
 
   return (
@@ -144,7 +136,7 @@ export default function Navbar() {
         {/* DESKTOP NAV */}
         {isDesktop ? (
           <div className="flex gap-10 text-sm font-normal">
-            {navPages.map((page) => (
+            {NAV_PAGES.map((page) => (
               <NavLink key={page} page={page} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
             ))}
           </div>
@@ -171,6 +163,7 @@ export default function Navbar() {
 
             <div
               id="mobile-menu"
+              ref={menuRef}
               className="fixed right-0 top-0 bottom-0 h-screen bg-white dark:bg-black w-[75vw] max-w-[320px] z-50 shadow-2xl flex flex-col"
               role="dialog"
               aria-modal="true"
@@ -190,30 +183,26 @@ export default function Navbar() {
               </div>
 
               <nav className="flex flex-col gap-2 p-6 overflow-y-auto" aria-label="Mobile navigation">
-                {navPages.map((page) => {
-                  const pageToSectionId: Record<string, string> = {
-                    home: "hero",
-                    about: "about",
-                    services: "skills",
-                    skills: "skills",
-                    projects: "projects",
-                    contact: "contact",
-                  }
+                {NAV_PAGES.map((page) => {
                   const lowerCasePage = page.toLowerCase()
-                  const sectionId = pageToSectionId[lowerCasePage] || lowerCasePage
+                  const sectionId = PAGE_TO_SECTION_ID[lowerCasePage] || lowerCasePage
 
                   return (
-                    <button
+                    <a
                       key={page}
+                      href={`#${sectionId}`}
                       className={`${
                         selectedPage === sectionId
                           ? "text-black dark:text-white font-normal bg-black/5 dark:bg-white/5"
                           : "text-black/60 dark:text-white/60"
-                      } py-3 px-4 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-200 text-base tracking-wide text-left`}
-                      onClick={() => handleMobileNavClick(page)}
+                      } py-3 px-4 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-200 text-base tracking-wide text-left block`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleMobileNavClick(page)
+                      }}
                     >
                       {page}
-                    </button>
+                    </a>
                   )
                 })}
               </nav>
