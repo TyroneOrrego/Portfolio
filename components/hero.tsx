@@ -1,5 +1,6 @@
 import { Circle, ArrowDown, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { scrollToSection } from "@/lib/utils"
 
 export default function Hero() {
   return (
@@ -30,11 +31,11 @@ export default function Hero() {
             {/* Stats with border-y layout */}
             <div className="flex flex-wrap gap-10 py-8 border-y border-black/10 dark:border-white/10">
               <div className="space-y-1">
-                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">3+</p>
+                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">4+</p>
                 <p className="text-sm text-black/60 dark:text-white/60 font-normal uppercase tracking-wide">Years Experience</p>
               </div>
               <div className="space-y-1">
-                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">60+</p>
+                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">90+</p>
                 <p className="text-sm text-black/60 dark:text-white/60 font-normal uppercase tracking-wide">Documents Authored</p>
               </div>
               <div className="space-y-1">
@@ -46,27 +47,33 @@ export default function Hero() {
             {/* CTAs - Minimalistic buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <Button
-                onClick={() => {
-                  const element = document.getElementById("projects")
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
-                  }
-                }}
-                className="bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/80 h-12 px-8 font-normal transition-opacity"
+                asChild
+                className="bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/80 h-12 px-8 font-normal transition-opacity cursor-pointer"
               >
-                View Work
+                <a 
+                  href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollToSection("projects")
+                  }}
+                >
+                  View Work
+                </a>
               </Button>
               <Button
-                onClick={() => {
-                  const element = document.getElementById("contact")
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
-                  }
-                }}
+                asChild
                 variant="outline"
-                className="h-12 px-8 font-normal hover:bg-black/5 dark:hover:bg-white/5 transition-opacity border-black/20 dark:border-white/20 bg-transparent"
+                className="h-12 px-8 font-normal hover:bg-black/5 dark:hover:bg-white/5 transition-opacity border-black/20 dark:border-white/20 bg-transparent cursor-pointer"
               >
-                Get in Touch
+                <a 
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollToSection("contact")
+                  }}
+                >
+                  Get in Touch
+                </a>
               </Button>
               <Button
                 asChild
@@ -74,9 +81,10 @@ export default function Hero() {
                 className="h-12 px-8 font-normal hover:bg-black/5 dark:hover:bg-white/5 transition-opacity"
               >
                 <a
-                  href="https://drive.google.com/file/d/1yBXLPK6xgUX1NyWbZ2ZL6o5dhyGmz5wC/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1WT-RDldEQPLuSl4QfXlfLc4tBtSEC-Ze/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Download Resume (opens in a new tab)"
                 >
                   <Download className="h-4 w-4 mr-2" />
                   Resume
@@ -88,18 +96,17 @@ export default function Hero() {
 
         {/* Scroll indicator - subtle, no bounce */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <button
-            onClick={() => {
-              const element = document.getElementById("about")
-              if (element) {
-                element.scrollIntoView({ behavior: "smooth" })
-              }
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault()
+              scrollToSection("about")
             }}
-            className="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-opacity p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5"
+            className="inline-block text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-opacity p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
             aria-label="Scroll to about section"
           >
             <ArrowDown className="h-5 w-5" />
-          </button>
+          </a>
         </div>
       </div>
 

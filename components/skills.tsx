@@ -18,6 +18,7 @@ export default function Skills() {
     "Markdown",
     "Swagger",
     "Postman",
+    "Bruno",
     "Confluence",
     "Jira",
     "Git",
@@ -51,9 +52,7 @@ export default function Skills() {
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
+      observer.disconnect()
     }
   }, [])
 
@@ -72,7 +71,7 @@ export default function Skills() {
         <div className="grid md:grid-cols-3 gap-12 lg:gap-20" ref={sectionRef}>
           {/* Expertise Column */}
           <div
-            className={`transition-all duration-700 ${
+            className={`transition-all duration-700 motion-reduce:transition-none ${
               sectionInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -94,7 +93,7 @@ export default function Skills() {
 
           {/* Tools Column */}
           <div
-            className={`transition-all duration-700 delay-100 ${
+            className={`transition-all duration-700 delay-100 motion-reduce:transition-none motion-reduce:delay-0 ${
               sectionInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -116,7 +115,7 @@ export default function Skills() {
 
           {/* Languages Column */}
           <div
-            className={`transition-all duration-700 delay-200 ${
+            className={`transition-all duration-700 delay-200 motion-reduce:transition-none motion-reduce:delay-0 ${
               sectionInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
