@@ -4,7 +4,7 @@ import { scrollToSection } from "@/lib/utils"
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative bg-white dark:bg-black min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden z-0 fade-in">
+    <section id="hero" className="relative bg-white dark:bg-black min-h-[100dvh] py-24 sm:py-0 flex flex-col justify-center items-center overflow-hidden z-0 fade-in">
       
       {/* Background glow effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-neutral-400/20 dark:bg-white/5 blur-[120px] rounded-full pointer-events-none" />
@@ -13,7 +13,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10 flex flex-col items-center text-center">
-        <div className="space-y-8 flex flex-col items-center">
+        <div className="space-y-6 sm:space-y-8 flex flex-col items-center">
           
           <div className="space-y-4">
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-[0.9] text-black dark:text-white">
@@ -47,7 +47,7 @@ export default function Hero() {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full sm:w-auto justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 sm:pt-8 w-full sm:w-auto justify-center">
             <Button
               asChild
               className="bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 h-14 px-10 rounded-full font-medium text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
@@ -97,7 +97,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <div className="absolute bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
         <span className="text-xs text-black/30 dark:text-white/30 uppercase tracking-widest font-medium">Scroll</span>
         <a
           href="#about"
