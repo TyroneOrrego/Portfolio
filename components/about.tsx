@@ -1,23 +1,61 @@
 export default function About() {
   return (
-    <section id="about" className="py-16 md:py-24 bg-white dark:bg-black fade-in">
+    <section id="about" className="py-16 md:py-32 bg-white dark:bg-black fade-in">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="mb-16">
-          <h2 className="text-2xl md:text-3xl font-normal tracking-tight mb-3 text-black dark:text-white">About</h2>
-          <div className="h-px w-12 bg-black dark:bg-white mb-4"></div>
-        </div>
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Column: Text */}
+          <div>
+            <div className="mb-8">
+              <h2 className="text-3xl md:text-4xl font-normal tracking-tight mb-4 text-black dark:text-white">
+                About
+              </h2>
+              <div className="h-px w-16 bg-black dark:bg-white mb-6"></div>
+            </div>
 
-        <div className="max-w-3xl space-y-8">
-          <p className="text-base md:text-lg text-black/60 dark:text-white/60 leading-relaxed">
-            With over 4 years of experience in technical writing, I specialize in creating documentation that not only
-            informs but empowers users to achieve their goals efficiently. My approach combines deep technical
-            understanding with user-centered design principles.
-          </p>
-          <p className="text-base md:text-lg text-black/60 dark:text-white/60 leading-relaxed">
-            I've worked with diverse teams across industries, from early-stage startups to established enterprises,
-            helping them communicate complex ideas clearly and effectively. My documentation has consistently reduced
-            support overhead while improving user satisfaction and product adoption.
-          </p>
+            <div className="space-y-6">
+              <p className="text-lg text-black/70 dark:text-white/70 leading-relaxed">
+                With over 4 years of experience in technical writing, I specialize in creating documentation that not only
+                informs but empowers users to achieve their goals efficiently. My approach combines deep technical
+                understanding with user-centered design principles.
+              </p>
+              <p className="text-lg text-black/70 dark:text-white/70 leading-relaxed">
+                I've worked with diverse teams across industries, from early-stage startups to established enterprises,
+                helping them communicate complex ideas clearly and effectively. My documentation has consistently reduced
+                support overhead while improving user satisfaction and product adoption.
+              </p>
+            </div>
+            
+            {/* Call to Action */}
+            <div className="mt-10">
+              <a href="#contact" className="inline-flex items-center justify-center px-6 py-3 bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition-opacity rounded-full font-medium">
+                Get in Touch
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Visuals / Stats */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-50 dark:bg-zinc-900/50 p-6 rounded-2xl flex flex-col justify-center">
+              <span className="text-4xl md:text-5xl font-light text-black dark:text-white mb-2">4+</span>
+              <span className="text-sm text-black/60 dark:text-white/60">Years Experience</span>
+            </div>
+            <div className="bg-gray-50 dark:bg-zinc-900/50 p-6 rounded-2xl flex flex-col justify-center">
+              <span className="text-4xl md:text-5xl font-light text-black dark:text-white mb-2">15+</span>
+              <span className="text-sm text-black/60 dark:text-white/60">Projects Completed</span>
+            </div>
+            <div className="bg-gray-50 dark:bg-zinc-900/50 p-6 rounded-2xl flex flex-col justify-center col-span-2">
+              <h3 className="text-lg text-black dark:text-white mb-4">Core Expertise</h3>
+              <div className="flex flex-wrap gap-2">
+                {["Technical Writing", "API Documentation", "Knowledge Management", "Content Architecture", "User Documentation"].map((skill) => (
+                  <span key={skill} className="px-3 py-1.5 bg-white dark:bg-black border border-black/10 dark:border-white/10 rounded-full text-sm text-black/70 dark:text-white/70">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
