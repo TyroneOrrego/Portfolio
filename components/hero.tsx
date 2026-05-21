@@ -1,117 +1,116 @@
-import { Circle, ArrowDown, Download } from "lucide-react"
+import { ArrowDown, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { scrollToSection } from "@/lib/utils"
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative bg-white dark:bg-black pt-16 z-0 fade-in">
-      <div className="container mx-auto px-6 py-32 sm:py-40 md:py-48 lg:py-56 max-w-7xl">
-        <div className="max-w-4xl">
-          <div className="space-y-10">
-            {/* Available badge - minimalistic with green dot */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 backdrop-blur-sm">
-              <Circle className="h-2 w-2 fill-green-500 text-green-500" />
-              <span className="text-sm font-normal text-black/60 dark:text-white/60">Available for new projects</span>
-            </div>
+    <section id="hero" className="relative bg-white dark:bg-black min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden z-0 fade-in">
+      
+      {/* Background glow effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-neutral-400/20 dark:bg-white/5 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="space-y-6">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tighter leading-[0.9] text-black dark:text-white">
-                Tyrone Orrego
-              </h1>
-              <p className="text-xl sm:text-2xl md:text-3xl text-black/60 dark:text-white/60 font-normal tracking-tight">
-                Technical Writer
-              </p>
-            </div>
+      {/* Grid overlay for technical texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
-            <p className="max-w-2xl text-base sm:text-lg md:text-xl text-black/60 dark:text-white/60 leading-relaxed">
-              Specializing in developer documentation, API guides, and knowledge bases that developers actually read and
-              understand.
+      <div className="container mx-auto px-6 max-w-5xl relative z-10 flex flex-col items-center text-center">
+        <div className="space-y-8 flex flex-col items-center">
+          
+          <div className="space-y-4">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-[0.9] text-black dark:text-white">
+              Tyrone Orrego
+            </h1>
+            <p className="text-2xl sm:text-3xl md:text-4xl text-black/60 dark:text-white/60 font-light tracking-tight">
+              Technical Writer
             </p>
+          </div>
 
-            {/* Stats with border-y layout */}
-            <div className="flex flex-wrap gap-10 py-8 border-y border-black/10 dark:border-white/10">
-              <div className="space-y-1">
-                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">4+</p>
-                <p className="text-sm text-black/60 dark:text-white/60 font-normal uppercase tracking-wide">Years Experience</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">90+</p>
-                <p className="text-sm text-black/60 dark:text-white/60 font-normal uppercase tracking-wide">Documents Authored</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-4xl sm:text-5xl font-normal text-black dark:text-white tabular-nums tracking-tight">3</p>
-                <p className="text-sm text-black/60 dark:text-white/60 font-normal uppercase tracking-wide">Languages</p>
-              </div>
+          <p className="max-w-2xl text-lg sm:text-xl md:text-2xl text-black/50 dark:text-white/50 leading-relaxed font-light">
+            Specializing in developer documentation, API guides, and knowledge bases that developers actually read and understand.
+          </p>
+
+          {/* Stats */}
+          <div className="flex flex-wrap justify-center gap-8 sm:gap-16 pt-8 pb-4">
+            <div className="flex flex-col items-center space-y-2">
+              <p className="text-5xl sm:text-6xl font-light text-black dark:text-white tabular-nums tracking-tighter">4+</p>
+              <p className="text-xs sm:text-sm text-black/40 dark:text-white/40 font-medium uppercase tracking-widest">Years Experience</p>
             </div>
-
-            {/* CTAs - Minimalistic buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button
-                asChild
-                className="bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/80 h-12 px-8 font-normal transition-opacity cursor-pointer"
-              >
-                <a 
-                  href="#projects"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    scrollToSection("projects")
-                  }}
-                >
-                  View Work
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="h-12 px-8 font-normal hover:bg-black/5 dark:hover:bg-white/5 transition-opacity border-black/20 dark:border-white/20 bg-transparent cursor-pointer"
-              >
-                <a 
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    scrollToSection("contact")
-                  }}
-                >
-                  Get in Touch
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="ghost"
-                className="h-12 px-8 font-normal hover:bg-black/5 dark:hover:bg-white/5 transition-opacity"
-              >
-                <a
-                  href="https://drive.google.com/file/d/1WT-RDldEQPLuSl4QfXlfLc4tBtSEC-Ze/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Download Resume (opens in a new tab)"
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  Resume
-                </a>
-              </Button>
+            <div className="w-px h-16 bg-black/10 dark:bg-white/10 hidden sm:block" />
+            <div className="flex flex-col items-center space-y-2">
+              <p className="text-5xl sm:text-6xl font-light text-black dark:text-white tabular-nums tracking-tighter">90+</p>
+              <p className="text-xs sm:text-sm text-black/40 dark:text-white/40 font-medium uppercase tracking-widest">Documents</p>
+            </div>
+            <div className="w-px h-16 bg-black/10 dark:bg-white/10 hidden sm:block" />
+            <div className="flex flex-col items-center space-y-2">
+              <p className="text-5xl sm:text-6xl font-light text-black dark:text-white tabular-nums tracking-tighter">3</p>
+              <p className="text-xs sm:text-sm text-black/40 dark:text-white/40 font-medium uppercase tracking-widest">Languages</p>
             </div>
           </div>
-        </div>
 
-        {/* Scroll indicator - subtle, no bounce */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <a
-            href="#about"
-            onClick={(e) => {
-              e.preventDefault()
-              scrollToSection("about")
-            }}
-            className="inline-block text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-opacity p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
-            aria-label="Scroll to about section"
-          >
-            <ArrowDown className="h-5 w-5" />
-          </a>
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full sm:w-auto justify-center">
+            <Button
+              asChild
+              className="bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 h-14 px-10 rounded-full font-medium text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <a 
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection("projects")
+                }}
+              >
+                View Work
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="h-14 px-10 rounded-full font-medium text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-all hover:scale-105 active:scale-95 border-black/10 dark:border-white/10 bg-transparent cursor-pointer"
+            >
+              <a 
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection("contact")
+                }}
+              >
+                Get in Touch
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="ghost"
+              className="h-14 px-8 rounded-full font-medium text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer"
+            >
+              <a
+                href="https://drive.google.com/file/d/1WT-RDldEQPLuSl4QfXlfLc4tBtSEC-Ze/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download Resume"
+              >
+                <Download className="h-5 w-5 mr-2" />
+                Resume
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* Subtle border at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-black/10 dark:bg-white/10"></div>
+      {/* Scroll indicator */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-xs text-black/30 dark:text-white/30 uppercase tracking-widest font-medium">Scroll</span>
+        <a
+          href="#about"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollToSection("about")
+          }}
+          className="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer animate-bounce"
+          aria-label="Scroll to about section"
+        >
+          <ArrowDown className="h-5 w-5" />
+        </a>
+      </div>
     </section>
   )
 }
