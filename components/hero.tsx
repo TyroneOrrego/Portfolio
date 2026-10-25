@@ -20,12 +20,12 @@ export default function Hero() {
               Tyrone Orrego
             </h1>
             <p className="text-2xl sm:text-3xl md:text-4xl text-black/60 dark:text-white/60 font-light tracking-tight">
-              Technical Writer
+              Senior Technical Writer
             </p>
           </div>
 
-          <p className="max-w-2xl text-lg sm:text-xl md:text-2xl text-black/50 dark:text-white/50 leading-relaxed font-light">
-            Specializing in developer documentation, API guides, and knowledge bases that developers actually read and understand.
+          <p className="max-w-3xl text-lg sm:text-xl md:text-2xl text-black/60 dark:text-white/60 leading-relaxed font-light">
+            Transforming complex systems into <span className="text-black dark:text-white font-normal">intuitive API documentation</span>, developer guides, and technical architectures that <span className="text-black dark:text-white font-normal">accelerate adoption</span> and eliminate support friction.
           </p>
 
           {/* Stats */}
@@ -83,7 +83,7 @@ export default function Hero() {
               className="h-14 px-8 rounded-full font-medium text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer"
             >
               <a
-                href="https://drive.google.com/file/d/1WT-RDldEQPLuSl4QfXlfLc4tBtSEC-Ze/view?usp=sharing"
+                href="https://drive.google.com/file/d/1dP4mZet3PUSzH_DXrUYGVpMvVzqXEjvJ/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Download Resume"

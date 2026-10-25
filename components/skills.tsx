@@ -24,6 +24,8 @@ export default function Skills() {
     "Git",
     "GitHub",
     "Agile",
+    "Docs-as-Code",
+    "AI"
   ]
 
   const languages = [
