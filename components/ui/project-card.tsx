@@ -101,4 +101,5 @@ export function ProjectCard({ project, variants = projectVariant }: ProjectCardP
   )
 }
 
+export { ProjectCardSkeleton } from "@/components/section-skeleton"
 export default ProjectCard
