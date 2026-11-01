@@ -17,11 +17,16 @@ const WritingShowcase = lazy(() => import("@/components/writing-showcase"))
 const SimpleContact = lazy(() => import("@/components/simple-contact"))
 const Footer = lazy(() => import("@/components/footer"))
 
-// Loading fallback components
-import { SectionSkeleton, HeroSkeleton } from "@/components/section-skeleton"
-
-const ComponentLoader = () => <SectionSkeleton />
-const HeroLoader = () => <HeroSkeleton />
+// Dedicated loading fallback skeletons tailored to each component
+import {
+  HeroSkeleton,
+  AboutSkeleton,
+  SkillsSkeleton,
+  ProjectsSkeleton,
+  WritingShowcaseSkeleton,
+  SimpleContactSkeleton,
+  FooterSkeleton,
+} from "@/components/section-skeleton"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
@@ -97,43 +102,43 @@ function AppContent() {
 
       <main id="main-content" role="main">
         <ErrorBoundary>
-          <Suspense fallback={<HeroLoader />}>
+          <Suspense fallback={<HeroSkeleton />}>
             <Hero />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <Suspense fallback={<ComponentLoader />}>
+          <Suspense fallback={<AboutSkeleton />}>
             <About />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <Suspense fallback={<ComponentLoader />}>
+          <Suspense fallback={<SkillsSkeleton />}>
             <Skills />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <Suspense fallback={<ComponentLoader />}>
+          <Suspense fallback={<ProjectsSkeleton />}>
             <Projects />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <Suspense fallback={<ComponentLoader />}>
+          <Suspense fallback={<WritingShowcaseSkeleton />}>
             <WritingShowcase />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <Suspense fallback={<ComponentLoader />}>
+          <Suspense fallback={<SimpleContactSkeleton />}>
             <SimpleContact />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <Suspense fallback={<ComponentLoader />}>
+          <Suspense fallback={<FooterSkeleton />}>
             <Footer />
           </Suspense>
         </ErrorBoundary>
@@ -187,4 +192,3 @@ export default function App() {
     </ThemeProvider>
   )
 }
-
